@@ -1,42 +1,50 @@
-import { useState } from "react";
 import "./styles.css";
+import { Home } from "./Home";
+import { Page1 } from "./Page1";
+import { Page2 } from "./Page2";
+import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
+import { Page1DetailA } from "./Page1DetalsA";
+import { Page1DetailB } from "./Page1DetalsB";
 
 export const App = () => {
-  const [monsters, setMonsters] = useState([{ name: "a", HP: 10 }]);
-  const [name, setName] = useState("");
-  const [hp, setHp] = useState("");
-
-  //各要素のセット及び再レンダリング
-  const onChangeName = (event) => setName(event.target.value);
-  const onChangeHP = (event) => setHp(event.target.value);
-  //送信ボタンクリックでモンスター情報をセット
-  const onClickSubmit = () => {
-    const newMonsters = [...monsters, { name: name, HP: hp }];
-    setMonsters(newMonsters);
-  };
   return (
-    <div>
-      <form action="#">
-        <p>名前</p>
-        <input id="name" type="text" onChange={onChangeName} />
-        <p>体力</p>
-        <input type="number" onChange={onChangeHP} />
-        <p>攻撃力</p>
-        <input type="number" />
+    <BrowserRouter>
+      <div className="App">
+        <Link to="/">Home</Link>
         <br />
-        <input type="submit" onClick={onClickSubmit} />
-      </form>
-      <div>
-        {monsters.map((monster) => {
-          return (
-            <div key={monster} className="mons">
-              <p>名前：{monster.name}</p>
-              <p>HP：{monster.HP}</p>
-              <button>Attack</button>
-            </div>
-          );
-        })}
+        <Link to="/page1">page1</Link>
+        <br />
+        <Link to="/page2">page2</Link>
       </div>
-    </div>
+
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+
+        <Route
+          path="/page1"
+          render={() => (
+            <Switch>
+              <Route exact path="/page1">
+                <Page1 />
+              </Route>
+              <Route path="/page1/detailA">
+                <Page1DetailA />
+              </Route>
+              <Route path="/page1/detailB">
+                <Page1DetailB />
+              </Route>
+
+              <Page1 />
+            </Switch>
+          )}
+        />
+
+        <Route path="/page2">
+          <Page2 />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 };
