@@ -3,8 +3,8 @@ import { Home } from "./Home";
 import { Page1 } from "./Page1";
 import { Page2 } from "./Page2";
 import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
-import { Page1DetailA } from "./Page1DetalsA";
-import { Page1DetailB } from "./Page1DetalsB";
+import { Page1DetailA } from "./Page1DetailA";
+import { Page1DetailB } from "./Page1DetailB";
 
 export const App = () => {
   return (
@@ -35,8 +35,6 @@ export const App = () => {
               <Route path="/page1/detailB">
                 <Page1DetailB />
               </Route>
-
-              <Page1 />
             </Switch>
           )}
         />
