@@ -52,3 +52,23 @@ def delete_equipment(db:Session,equip_id:int):
         db.delete(del_equipment)
         db.commit()
     return del_equipment
+
+def start_equipment_operation(db:Session,equip_id:int):
+    start_equipment = get_equipment(db,equip_id)
+    print(start_equipment)
+    start_equipment.operation = True
+    db.add(start_equipment)
+    db.commit()
+    db.refresh(start_equipment)
+ 
+    return start_equipment
+
+def stop_equipment_operation(db:Session,equip_id:int):
+    stop_equipment = get_equipment(db,equip_id)
+    print(stop_equipment)
+    stop_equipment.operation = False
+    db.add(stop_equipment)
+    db.commit()
+    db.refresh(stop_equipment)
+ 
+    return stop_equipment
