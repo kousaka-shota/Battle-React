@@ -22,3 +22,8 @@ class Sensor(Base):
     operation = Column(Boolean,default=False)
 
     equipment = relationship("Equipment",back_populates="sensor")
+
+# class User(Base):
+#     __tablename__ = "user"
+#     id=Column(Integer,primary_key=True)
+#     username=Column(String)
